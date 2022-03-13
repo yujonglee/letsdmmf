@@ -4,7 +4,7 @@ Traverse `DMMF` of your `Prisma schema`, in your terminal.
 Powered by [`jless`](https://github.com/PaulJuliusMartinez/jless).
 
 ## Installation
-You shoud install [`jless`](https://jless.io) to use `letdmmf`.
+You shoud install [`jless`](https://jless.io) first to use `letsdmmf`.
 
 ```shell
 brew tap yujong-lee/tap
