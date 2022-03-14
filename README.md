@@ -15,5 +15,6 @@ brew install letsdmmf
 See [user guide](https://jless.io/user-guide.html) for details.
 
 ```shell
+# letsdmmf --help
 letsdmmf my/schema.prisma
 ```
