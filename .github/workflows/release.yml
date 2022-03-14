@@ -1,0 +1,31 @@
+name: release
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+jobs:
+  create-binaries:
+    name: create-binaries
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+      - name: Strip binary
+        run: strip target/release/letsdmmf
+      - name: Compress binary
+        run: |
+          mv target/release/letsdmmf .
+          tar -czf letsdmmf.tar.gz letsdmmf
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          path: letsdmmf.tar.gz

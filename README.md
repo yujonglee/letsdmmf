@@ -4,8 +4,6 @@ Traverse `DMMF` of your `Prisma schema`, in your terminal.
 Powered by [`jless`](https://github.com/PaulJuliusMartinez/jless).
 
 ## Installation
-You shoud install [`jless`](https://jless.io) first to use `letsdmmf`.
-
 ```shell
 brew tap yujong-lee/tap
 brew install letsdmmf
@@ -17,4 +15,8 @@ See [user guide](https://jless.io/user-guide.html) for details.
 ```shell
 # letsdmmf --help
 letsdmmf my/schema.prisma
+letsdmmf my/schema.prisma -m=line
+letsdmmf my/schema.prisma -M data
+letsdmmf my/schema.prisma --scrolloff=3
+letsdmmf my/schema.prisma --scrolloff 3
 ```
