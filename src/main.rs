@@ -7,6 +7,8 @@ use std::thread;
 use clap::IntoApp;
 use clap::{ArgEnum, ErrorKind, Parser};
 
+use letsdmmf::validate;
+
 static ABOUT: &str = concat!(r#"Traverse DMMF of your Prisma Schema, in your command"#);
 
 static MODE: &str = concat!(
@@ -43,34 +45,9 @@ enum Mode {
     Line,
 }
 
-fn validate_path(path: &str) {
-    let is_exist = Path::new(&path).exists();
-    let mut cmd = Args::command();
-
-    if is_exist {
-        if !path.ends_with(".prisma") {
-            let file_name = Path::new(&path).file_name().unwrap();
-
-            cmd.error(
-                ErrorKind::ValueValidation,
-                format!(
-                    "Invalid File Extension, \"something.prisma\" expected, found {:?}",
-                    file_name
-                ),
-            )
-            .exit();
-        }
-    } else {
-        cmd.error(
-            ErrorKind::ValueValidation,
-            format!("No such file: \"{}\"", path),
-        )
-        .exit();
-    }
-}
-
 fn main() -> io::Result<()> {
     let mut cmd = Args::command();
+
     let args = Args::parse();
     let Args {
         path,
@@ -78,7 +55,11 @@ fn main() -> io::Result<()> {
         scrolloff,
     } = args;
 
-    validate_path(&path);
+    let (is_error, message) = validate::path(Path::new(&path));
+
+    if is_error {
+        cmd.error(ErrorKind::ValueValidation, message).exit();
+    }
 
     let schema = fs::read_to_string(path).expect("Failed to read schema from path");
 
