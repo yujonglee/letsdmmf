@@ -81,7 +81,7 @@ fn main() -> io::Result<()> {
     let mut child = match child_result {
         Ok(child) => child,
         Err(_e) => {
-            cmd.error(ErrorKind::Io, "Failed to run \"jelss\" properly")
+            cmd.error(ErrorKind::Io, "Failed to run \"jless\" properly")
                 .exit();
         }
     };
