@@ -9,7 +9,7 @@ use clap::{ArgEnum, ErrorKind, Parser};
 
 use letsdmmf::validate;
 
-static ABOUT: &str = concat!(r#"Traverse DMMF of your Prisma Schema, in your command"#);
+static ABOUT: &str = "Traverse DMMF of your Prisma Schema, in your terminal";
 
 static MODE: &str = concat!(
     r#"Initial viewing mode. "#,
