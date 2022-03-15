@@ -89,8 +89,12 @@ fn main() -> io::Result<()> {
         }
     };
 
-    let (_cfg, dml) = datamodel::parse_schema(&schema).expect("Failed to parse schema");
-    let dmmf = dmmf::render_to_dmmf(&dml);
+    let dmmf = match datamodel::parse_schema(&schema) {
+        Ok((_cfg, dml)) => dmmf::render_to_dmmf(&dml),
+        Err(message) => {
+            cmd.error(ErrorKind::ValueValidation, message).exit();
+        }
+    };
 
     let child_result = Command::new("jless")
         .stdin(Stdio::piped())
