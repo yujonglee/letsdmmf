@@ -55,11 +55,12 @@ fn main() -> io::Result<()> {
         scrolloff,
     } = args;
 
-    let (is_error, message) = validate::path(Path::new(&path));
-
-    if is_error {
-        cmd.error(ErrorKind::ValueValidation, message).exit();
-    }
+    match validate::path(Path::new(&path)) {
+        Ok(()) => {}
+        Err(message) => {
+            cmd.error(ErrorKind::ValueValidation, message).exit();
+        }
+    };
 
     let schema = fs::read_to_string(path).expect("Failed to read schema from path");
 

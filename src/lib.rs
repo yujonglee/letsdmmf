@@ -1,14 +1,14 @@
 pub mod validate {
     use std::path::Path;
 
-    pub fn path(path: &Path) -> (bool, String) {
+    pub fn path(path: &Path) -> Result<(), String> {
         let is_exist = path.exists();
 
         if is_exist {
             if path.is_dir() {
                 let message = String::from("\"File\" expected, got \"directory\" instead");
 
-                return (true, message);
+                return Err(message);
             }
 
             if path.extension().unwrap() != "prisma" {
@@ -18,15 +18,15 @@ pub mod validate {
                     file_name
                 );
 
-                return (true, message);
+                return Err(message);
             }
         } else {
             let message = format!("No such file or directory: \"{}\"", path.to_str().unwrap());
 
-            return (true, message);
+            return Err(message);
         };
 
-        return (false, String::from(""));
+        return Ok(());
     }
 }
 
@@ -41,11 +41,11 @@ mod tests {
     fn validate_existence() {
         let file_path = "/something/not/exist";
 
-        let (is_error, message) = validate::path(Path::new(file_path));
+        let result = validate::path(Path::new(file_path));
 
-        assert!(is_error);
+        assert!(result.is_err());
         assert_eq!(
-            message,
+            result.unwrap_err(),
             "No such file or directory: \"/something/not/exist\""
         );
     }
@@ -54,10 +54,13 @@ mod tests {
     fn validate_directory() {
         let file_path = temp_dir();
 
-        let (is_error, message) = validate::path(Path::new(file_path.to_str().unwrap()));
+        let result = validate::path(Path::new(file_path.to_str().unwrap()));
 
-        assert!(is_error);
-        assert_eq!(message, "\"File\" expected, got \"directory\" instead");
+        assert!(result.is_err());
+        assert_eq!(
+            result.unwrap_err(),
+            "\"File\" expected, got \"directory\" instead"
+        );
     }
 
     #[test]
@@ -65,10 +68,9 @@ mod tests {
         let file_path = temp_dir().join("schema.prisma");
         File::create(&file_path).unwrap();
 
-        let (is_error, message) = validate::path(Path::new(file_path.to_str().unwrap()));
+        let result = validate::path(Path::new(file_path.to_str().unwrap()));
 
-        assert!(!is_error);
-        assert_eq!(message, "");
+        assert!(result.is_ok());
     }
 
     #[test]
@@ -76,11 +78,11 @@ mod tests {
         let file_path = temp_dir().join("schema.json");
         File::create(&file_path).unwrap();
 
-        let (is_error, message) = validate::path(Path::new(file_path.to_str().unwrap()));
+        let result = validate::path(Path::new(file_path.to_str().unwrap()));
 
-        assert!(is_error);
+        assert!(result.is_err());
         assert_eq!(
-            message,
+            result.unwrap_err(),
             "Invalid File Extension. \"something.prisma\" expected, got \"schema.json\" instead"
         );
     }
