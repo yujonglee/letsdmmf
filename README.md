@@ -16,7 +16,7 @@ brew install letsdmmf
 ```shell
 # letsdmmf --help
 
-lestdmmf https://raw.githubusercontent.com/prisma/prisma-examples/latest/databases/sql-server/prisma/schema.prisma 
+letsdmmf https://raw.githubusercontent.com/prisma/prisma-examples/latest/databases/sql-server/prisma/schema.prisma 
 letsdmmf my/schema.prisma
 
 letsdmmf my/schema.prisma -m=line
