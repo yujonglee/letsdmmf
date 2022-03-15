@@ -5,29 +5,34 @@ pub fn path(path: &str) -> Result<(), String> {
     let path = Path::new(path);
     let is_exist = path.exists();
 
-    if is_exist {
-        if path.is_dir() {
-            let message = String::from("\"File\" expected, got \"directory\" instead");
-
-            return Err(message);
-        }
-
-        if path.extension().unwrap() != "prisma" {
-            let file_name = path.file_name().unwrap();
-            let message = format!(
-                "Invalid File Extension. \"something.prisma\" expected, got {:?} instead",
-                file_name
-            );
-
-            return Err(message);
-        }
-    } else {
+    if !is_exist {
         let message = format!("No such file or directory: \"{}\"", path.to_str().unwrap());
 
         return Err(message);
     };
 
-    return Ok(());
+    if path.is_dir() {
+        let message = String::from("\"File\" expected, got \"directory\" instead");
+
+        return Err(message);
+    };
+
+    match path.extension() {
+        Some(extension) => {
+            if extension != "prisma" {
+                let file_name = path.file_name().unwrap();
+                let message = format!(
+                    "Invalid File Extension. \"something.prisma\" expected, got {:?} instead",
+                    file_name
+                );
+
+                Err(message)
+            } else {
+                Ok(())
+            }
+        }
+        None => Ok(()),
+    }
 }
 
 #[cfg(test)]
@@ -81,6 +86,16 @@ mod path {
             result.unwrap_err(),
             "Invalid File Extension. \"something.prisma\" expected, got \"schema.json\" instead"
         );
+    }
+
+    #[test]
+    fn validate_no_extension() {
+        let file_path = temp_dir().join("schema");
+        File::create(&file_path).unwrap();
+
+        let result = path(file_path.to_str().unwrap());
+
+        assert!(result.is_ok());
     }
 }
 
