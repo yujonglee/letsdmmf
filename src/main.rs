@@ -1,12 +1,13 @@
 use std::fs;
 use std::io::{self, Write};
-use std::path::Path;
 use std::process::{Command, Stdio};
 use std::thread;
 
 use clap::IntoApp;
 use clap::{ArgEnum, ErrorKind, Parser};
 
+use letsdmmf::location;
+use letsdmmf::location::Location;
 use letsdmmf::validate;
 
 static ABOUT: &str = "Traverse DMMF of your Prisma Schema, in your terminal";
@@ -45,14 +46,29 @@ enum Mode {
     Line,
 }
 
-fn get_schema(path: String) -> Result<String, String> {
-    match validate::path(Path::new(&path)) {
-        Ok(()) => {
-            let schema = fs::read_to_string(path).expect("Failed to read schema from path");
+fn get_schema(location: String) -> Result<String, String> {
+    let location_type = location::new(&location);
 
-            Ok(schema)
-        }
-        Err(message) => Err(message),
+    match location_type {
+        Location::Path(path) => match validate::path(&path) {
+            Ok(()) => {
+                let schema = fs::read_to_string(path).expect("Failed to read schema from path");
+
+                Ok(schema)
+            }
+            Err(message) => Err(message),
+        },
+        Location::Url(url) => match validate::url(&url) {
+            Ok(url) => {
+                let schema = reqwest::blocking::get(url)
+                    .expect("Failed to get response")
+                    .text()
+                    .expect("Failed to convert response to text");
+
+                Ok(schema)
+            }
+            Err(message) => Err(message),
+        },
     }
 }
 

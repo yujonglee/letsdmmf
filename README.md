@@ -12,13 +12,18 @@ brew install letsdmmf
 ```
 
 ## Usage
-See [user guide](https://jless.io/user-guide.html) for details.
 
 ```shell
 # letsdmmf --help
+
+lestdmmf https://raw.githubusercontent.com/prisma/prisma-examples/latest/databases/sql-server/prisma/schema.prisma 
 letsdmmf my/schema.prisma
+
 letsdmmf my/schema.prisma -m=line
 letsdmmf my/schema.prisma -M data
+
 letsdmmf my/schema.prisma --scrolloff=3
 letsdmmf my/schema.prisma --scrolloff 3
+
 ```
+See [user guide](https://jless.io/user-guide.html) for details.
