@@ -6,6 +6,7 @@ use std::thread;
 use clap::IntoApp;
 use clap::{ArgEnum, ErrorKind, Parser};
 
+use letsdmmf::core;
 use letsdmmf::location;
 use letsdmmf::location::Location;
 use letsdmmf::validate;
@@ -89,8 +90,8 @@ fn main() -> io::Result<()> {
         }
     };
 
-    let dmmf = match datamodel::parse_schema(&schema) {
-        Ok((_cfg, dml)) => dmmf::render_to_dmmf(&dml),
+    let dmmf = match core::dmmf(schema) {
+        Ok(dmmf) => dmmf,
         Err(message) => {
             cmd.error(ErrorKind::ValueValidation, message).exit();
         }
