@@ -45,6 +45,17 @@ enum Mode {
     Line,
 }
 
+fn get_schema(path: String) -> Result<String, String> {
+    match validate::path(Path::new(&path)) {
+        Ok(()) => {
+            let schema = fs::read_to_string(path).expect("Failed to read schema from path");
+
+            Ok(schema)
+        }
+        Err(message) => Err(message),
+    }
+}
+
 fn main() -> io::Result<()> {
     let mut cmd = Args::command();
 
@@ -55,14 +66,12 @@ fn main() -> io::Result<()> {
         scrolloff,
     } = args;
 
-    match validate::path(Path::new(&path)) {
-        Ok(()) => {}
+    let schema = match get_schema(path) {
+        Ok(schema) => schema,
         Err(message) => {
             cmd.error(ErrorKind::ValueValidation, message).exit();
         }
     };
-
-    let schema = fs::read_to_string(path).expect("Failed to read schema from path");
 
     let (_cfg, dml) = datamodel::parse_schema(&schema).expect("Failed to parse schema");
     let dmmf = dmmf::render_to_dmmf(&dml);
