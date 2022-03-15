@@ -10,7 +10,7 @@ use letsdmmf::location;
 use letsdmmf::location::Location;
 use letsdmmf::validate;
 
-static ABOUT: &str = "Traverse DMMF of your Prisma Schema, in your terminal";
+static ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
 
 static MODE: &str = concat!(
     r#"Initial viewing mode. "#,

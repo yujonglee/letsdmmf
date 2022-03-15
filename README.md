@@ -1,7 +1,7 @@
 # Let's DMMF
 [![release](https://github.com/yujong-lee/letsdmmf/actions/workflows/ci.yml/badge.svg)](https://github.com/yujong-lee/letsdmmf/actions/workflows/ci.yml)
 
-Traverse `DMMF` of your `Prisma schema`, in your terminal.
+Traverse `DMMF` of `Prisma schema`, in your terminal.
 
 Powered by [`jless`](https://github.com/PaulJuliusMartinez/jless).
 
