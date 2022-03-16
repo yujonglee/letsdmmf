@@ -1,6 +1,8 @@
-use std::io::Write;
 use std::process::{Command, Stdio};
-use std::{io, thread};
+use std::{
+    io::{self, Write},
+    thread,
+};
 
 use letsdmmf::cli;
 use letsdmmf::core;
