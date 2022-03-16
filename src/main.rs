@@ -29,7 +29,11 @@ fn main() -> io::Result<()> {
     };
 
     match output {
-        Some(path) => std::fs::write(path, &dmmf).expect("Failed to write output"),
+        Some(path) => {
+            let contents = serde_json::to_string_pretty(&dmmf).expect("Failed to stringify DMMF");
+
+            std::fs::write(path, contents).expect("Failed to write output")
+        }
         None => (),
     }
 
@@ -54,7 +58,11 @@ fn main() -> io::Result<()> {
 
     thread::spawn(move || {
         stdin
-            .write_all((&dmmf).as_bytes())
+            .write_all(
+                serde_json::to_string(&dmmf)
+                    .expect("Failed to stringify DMMF")
+                    .as_bytes(),
+            )
             .expect("Failed to write to stdin");
     });
 
