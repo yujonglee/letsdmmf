@@ -5,9 +5,14 @@ use clap::{ArgEnum, Command, ErrorKind, IntoApp, Parser};
 pub struct Args {
     pub path: String,
 
+    #[clap(short, long, help = OUTPUT)]
+    pub output: Option<String>,
+
     #[clap(short, long, default_value_t = Mode::Data, help = MODE, arg_enum)]
     pub mode: Mode,
+
     #[clap(
+        short,
         long,
         parse(try_from_str),
         default_value_t = 3,
@@ -23,6 +28,8 @@ pub enum Mode {
 }
 
 static ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
+
+static OUTPUT: &str = "Output file path";
 
 static MODE: &str = concat!(
     r#"Initial viewing mode. "#,

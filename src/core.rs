@@ -41,7 +41,7 @@ pub fn get_dmmf(datamodel_string: String) -> Result<String, String> {
 
     // https://github.com/prisma/prisma/blob/6561b8adf4005a7762716cd73bb6df545ff0762e/packages/client/src/runtime/externalToInternalDmmf.ts#L22
     // Is getMappings really needed?
-    let dmmf_string = serde_json::to_string(&dmmf).unwrap();
+    let dmmf_string = serde_json::to_string_pretty(&dmmf).unwrap();
 
     Ok(dmmf_string)
 }

@@ -13,6 +13,7 @@ fn main() -> io::Result<()> {
     let args = cli::get_args();
     let cli::Args {
         path,
+        output,
         mode,
         scrolloff,
     } = args;
@@ -26,6 +27,11 @@ fn main() -> io::Result<()> {
         Ok(dmmf) => dmmf,
         Err(message) => cli::error(cmd, message),
     };
+
+    match output {
+        Some(path) => std::fs::write(path, &dmmf).expect("Failed to write output"),
+        None => (),
+    }
 
     let child_result = Command::new("jless")
         .stdin(Stdio::piped())
