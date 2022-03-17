@@ -3,7 +3,8 @@ use clap::{ArgEnum, Command, ErrorKind, IntoApp, Parser};
 #[derive(Parser)]
 #[clap(author, version, about = ABOUT, long_about = None)]
 pub struct Args {
-    pub path: String,
+    #[clap(help = LOCATION)]
+    pub location: String,
 
     #[clap(short, long, help = OUTPUT)]
     pub output: Option<String>,
@@ -28,6 +29,8 @@ pub enum Mode {
 }
 
 static ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
+
+static LOCATION: &str = "Location of Prisma schema. Can be file path or url";
 
 static OUTPUT: &str = "Output file path";
 

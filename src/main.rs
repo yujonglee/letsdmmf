@@ -12,13 +12,13 @@ fn main() -> io::Result<()> {
 
     let args = cli::get_args();
     let cli::Args {
-        path,
+        location,
         output,
         mode,
         scrolloff,
     } = args;
 
-    let schema = match core::get_schema(path) {
+    let schema = match core::get_schema(location) {
         Ok(schema) => schema,
         Err(message) => cli::error(cmd, message),
     };
