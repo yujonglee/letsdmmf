@@ -639,7 +639,7 @@ checksum = "3ee2393c4a91429dffb4bedf19f4d6abf27d8a732c8ce4980305d782e5426d57"
 [[package]]
 name = "datamodel"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "bigdecimal 0.2.2",
  "chrono",
@@ -662,7 +662,7 @@ dependencies = [
 [[package]]
 name = "datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "diagnostics",
  "enumflags2",
@@ -685,7 +685,7 @@ dependencies = [
 [[package]]
 name = "diagnostics"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "colored",
  "pest",
@@ -723,7 +723,7 @@ dependencies = [
 [[package]]
 name = "dml"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "chrono",
  "cuid",
@@ -739,7 +739,7 @@ dependencies = [
 [[package]]
 name = "dmmf"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "bigdecimal 0.2.2",
  "datamodel",
@@ -1476,6 +1476,7 @@ dependencies = [
  "query-core",
  "request-handlers",
  "reqwest",
+ "serde",
  "serde_json",
 ]
 
@@ -1823,7 +1824,7 @@ dependencies = [
 [[package]]
 name = "mongodb-client"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "mongodb",
  "once_cell",
@@ -1834,7 +1835,7 @@ dependencies = [
 [[package]]
 name = "mongodb-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "datamodel-connector",
  "enumflags2",
@@ -1846,7 +1847,7 @@ dependencies = [
 [[package]]
 name = "mongodb-query-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1965,7 +1966,7 @@ dependencies = [
 [[package]]
 name = "native-types"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "serde",
  "serde_json",
@@ -2043,9 +2044,9 @@ dependencies = [
 
 [[package]]
 name = "num_threads"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c539a50b93a303167eded6e8dff5220cd39447409fb659f4cd24b1f72fe4f133"
+checksum = "aba1801fb138d8e85e11d0fc70baf4fe1cdfffda7c6cd34a854905df588e5ed0"
 dependencies = [
  "libc",
 ]
@@ -2219,7 +2220,7 @@ dependencies = [
 [[package]]
 name = "parser-database"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "diagnostics",
  "enumflags2",
@@ -2425,7 +2426,7 @@ checksum = "be91bcc43e73799dc46a6c194a55e7aae1d86cc867c860fd4a436019af21bd8c"
 [[package]]
 name = "prisma-inflector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "once_cell",
  "regex",
@@ -2435,7 +2436,7 @@ dependencies = [
 [[package]]
 name = "prisma-models"
 version = "0.0.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "bigdecimal 0.2.2",
  "chrono",
@@ -2456,7 +2457,7 @@ dependencies = [
 [[package]]
 name = "prisma-value"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "base64 0.12.3",
  "bigdecimal 0.2.2",
@@ -2551,7 +2552,7 @@ dependencies = [
 [[package]]
 name = "query-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2571,7 +2572,7 @@ dependencies = [
 [[package]]
 name = "query-core"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "async-trait",
  "base64 0.12.3",
@@ -2744,7 +2745,7 @@ dependencies = [
 [[package]]
 name = "request-handlers"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "bigdecimal 0.2.2",
  "connection-string",
@@ -2925,7 +2926,7 @@ dependencies = [
 [[package]]
 name = "schema-ast"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "diagnostics",
  "pest",
@@ -3212,7 +3213,7 @@ checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 [[package]]
 name = "sql-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "datamodel-connector",
  "enumflags2",
@@ -3225,7 +3226,7 @@ dependencies = [
 [[package]]
 name = "sql-query-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3293,9 +3294,9 @@ checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 
 [[package]]
 name = "syn"
-version = "1.0.88"
+version = "1.0.89"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ebd69e719f31e88618baa1eaa6ee2de5c9a1c004f1e9ecdb58e8352a13f20a01"
+checksum = "ea297be220d52398dcc07ce15a209fce436d361735ac1db700cab3b6cdfb9f54"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3777,7 +3778,7 @@ dependencies = [
 [[package]]
 name = "user-facing-error-macros"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3787,7 +3788,7 @@ dependencies = [
 [[package]]
 name = "user-facing-errors"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#9a0291e9150197010f58d980d20181c4061cf40b"
+source = "git+https://github.com/prisma/prisma-engines#b4538d597e8760ef8b6c235ed3127f82be2db0fb"
 dependencies = [
  "backtrace",
  "indoc",

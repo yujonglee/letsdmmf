@@ -6,6 +6,8 @@ use query_core::schema::QuerySchemaRef;
 use query_core::schema_builder;
 use request_handlers::dmmf::{self, DataModelMetaFormat};
 
+pub mod types;
+
 // https://github.com/prisma/prisma-engines/blob/c9f86866d2fb27b2066e5447ee7f6f65c46c5707/query-engine/query-engine-node-api/src/node_api/functions.rs#L30
 pub fn from(datamodel_string: String) -> Result<DataModelMetaFormat, String> {
     let datamodel =
