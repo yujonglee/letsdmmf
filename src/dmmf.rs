@@ -1,4 +1,4 @@
-use std::{fs, sync::Arc};
+use std::sync::Arc;
 
 use datamodel_connector::ConnectorCapabilities;
 use prisma_models::InternalDataModelBuilder;
@@ -6,10 +6,8 @@ use query_core::schema::QuerySchemaRef;
 use query_core::schema_builder;
 use request_handlers::dmmf::{self, DataModelMetaFormat};
 
-use crate::{location, validate};
-
 // https://github.com/prisma/prisma-engines/blob/c9f86866d2fb27b2066e5447ee7f6f65c46c5707/query-engine/query-engine-node-api/src/node_api/functions.rs#L30
-pub fn get_dmmf(datamodel_string: String) -> Result<DataModelMetaFormat, String> {
+pub fn from(datamodel_string: String) -> Result<DataModelMetaFormat, String> {
     let datamodel =
         datamodel::parse_datamodel(&datamodel_string).map_err(|errors| errors.to_string())?;
 
@@ -49,7 +47,7 @@ mod tests {
 
     #[test]
     fn snapshot() {
-        insta::assert_debug_snapshot!(serde_json::to_string(&get_dmmf(String::from(
+        insta::assert_debug_snapshot!(serde_json::to_string(&from(String::from(
             r#"
             // This is your Prisma schema file,
             // learn more about it in the docs: https://pris.ly/d/prisma-schema
@@ -109,33 +107,5 @@ mod tests {
             }
             "#
         ))))
-    }
-}
-
-pub fn get_schema(location: String) -> Result<String, String> {
-    let location_type = location::new(&location);
-
-    use location::Location;
-
-    match location_type {
-        Location::Path(path) => match validate::path(&path) {
-            Ok(()) => {
-                let schema = fs::read_to_string(path).expect("Failed to read schema from path");
-
-                Ok(schema)
-            }
-            Err(message) => Err(message),
-        },
-        Location::Url(url) => match validate::url(&url) {
-            Ok(url) => {
-                let schema = reqwest::blocking::get(url)
-                    .expect("Failed to get response")
-                    .text()
-                    .expect("Failed to convert response to text");
-
-                Ok(schema)
-            }
-            Err(message) => Err(message),
-        },
     }
 }

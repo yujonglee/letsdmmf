@@ -5,7 +5,8 @@ use std::{
 };
 
 use letsdmmf::cli;
-use letsdmmf::core;
+use letsdmmf::dmmf;
+use letsdmmf::location;
 
 fn main() -> io::Result<()> {
     let cmd = cli::get_cmd();
@@ -18,12 +19,12 @@ fn main() -> io::Result<()> {
         scrolloff,
     } = args;
 
-    let schema = match core::get_schema(location) {
+    let schema = match location::new(&location).get_schema() {
         Ok(schema) => schema,
         Err(message) => cli::error(cmd, message),
     };
 
-    let dmmf = match core::get_dmmf(schema) {
+    let dmmf = match dmmf::from(schema) {
         Ok(dmmf) => dmmf,
         Err(message) => cli::error(cmd, message),
     };

@@ -1,4 +1,3 @@
 pub mod cli;
-pub mod core;
+pub mod dmmf;
 pub mod location;
-pub mod validate;
