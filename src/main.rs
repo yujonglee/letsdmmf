@@ -33,6 +33,16 @@ fn main() -> io::Result<()> {
         Some(path) => {
             let contents = serde_json::to_string_pretty(&dmmf).expect("Failed to stringify DMMF");
 
+            if std::path::Path::new(&path).is_dir() {
+                cli::error(
+                    cmd,
+                    String::from(format!(
+                        "Expect file path, got directory instead. Maybe you want \"{}/dmmf.json\"?",
+                        path
+                    )),
+                )
+            }
+
             std::fs::write(path, contents).expect("Failed to write output")
         }
         None => {
