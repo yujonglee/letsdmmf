@@ -35,39 +35,39 @@ fn main() -> io::Result<()> {
 
             std::fs::write(path, contents).expect("Failed to write output")
         }
-        None => (),
+        None => {
+            let child_result = Command::new("jless")
+                .stdin(Stdio::piped())
+                .args(["--scrolloff", &(scrolloff.to_string())])
+                .args([
+                    "--mode",
+                    match mode {
+                        cli::Mode::Data => "data",
+                        cli::Mode::Line => "line",
+                    },
+                ])
+                .spawn();
+
+            let mut child = match child_result {
+                Ok(child) => child,
+                Err(_e) => cli::error(cmd, String::from("Failed to run \"jless\" properly")),
+            };
+
+            let mut stdin = child.stdin.take().expect("Failed to open stdin");
+
+            thread::spawn(move || {
+                stdin
+                    .write_all(
+                        serde_json::to_string(&dmmf)
+                            .expect("Failed to stringify DMMF")
+                            .as_bytes(),
+                    )
+                    .expect("Failed to write to stdin");
+            });
+
+            child.wait()?;
+        }
     }
-
-    let child_result = Command::new("jless")
-        .stdin(Stdio::piped())
-        .args(["--scrolloff", &(scrolloff.to_string())])
-        .args([
-            "--mode",
-            match mode {
-                cli::Mode::Data => "data",
-                cli::Mode::Line => "line",
-            },
-        ])
-        .spawn();
-
-    let mut child = match child_result {
-        Ok(child) => child,
-        Err(_e) => cli::error(cmd, String::from("Failed to run \"jless\" properly")),
-    };
-
-    let mut stdin = child.stdin.take().expect("Failed to open stdin");
-
-    thread::spawn(move || {
-        stdin
-            .write_all(
-                serde_json::to_string(&dmmf)
-                    .expect("Failed to stringify DMMF")
-                    .as_bytes(),
-            )
-            .expect("Failed to write to stdin");
-    });
-
-    child.wait()?;
 
     Ok(())
 }
