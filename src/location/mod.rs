@@ -11,7 +11,7 @@ pub enum Location {
 
 impl Location {
     pub fn get_schema(self) -> Result<String, String> {
-        let location = validate::validate(self)?;
+        let location = self.validate()?;
 
         match location {
             Location::Path(path) => {
@@ -27,6 +27,13 @@ impl Location {
 
                 Ok(schema)
             }
+        }
+    }
+
+    pub fn validate(self) -> Result<Location, String> {
+        match self {
+            Location::Path(ref path) => validate::path(&path).map(|_| self),
+            Location::Url(ref url) => validate::url(&url).map(|_| self),
         }
     }
 }

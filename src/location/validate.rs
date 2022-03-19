@@ -1,16 +1,7 @@
 use reqwest::Url;
 use std::path::Path;
 
-use crate::location::Location;
-
-pub fn validate(location: Location) -> Result<Location, String> {
-    match location {
-        Location::Path(ref path) => self::path(&path).map(|_| location),
-        Location::Url(ref url) => self::url(&url).map(|_| location),
-    }
-}
-
-fn path(path: &str) -> Result<(), String> {
+pub fn path(path: &str) -> Result<(), String> {
     let path = Path::new(path);
     let is_exist = path.exists();
 
@@ -108,7 +99,7 @@ mod path {
     }
 }
 
-fn url(url: &str) -> Result<String, String> {
+pub fn url(url: &str) -> Result<String, String> {
     match Url::parse(&url) {
         Ok(url) => Ok(url.to_string()),
         Err(e) => Err(e.to_string()),
