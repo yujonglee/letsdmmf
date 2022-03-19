@@ -1,0 +1,11 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#implicit-many-to-many-relations
+
+model Post {
+  id         Int        @id @default(autoincrement())
+  categories Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}

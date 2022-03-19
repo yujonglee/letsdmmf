@@ -1,12 +1,15 @@
 use reqwest::Url;
 use std::fs;
 
+use crate::example::*;
+
 mod validate;
 
 #[derive(Debug, PartialEq)]
 pub enum Location {
     Url(String),
     Path(String),
+    Example(Relation),
 }
 
 impl Location {
@@ -27,6 +30,7 @@ impl Location {
 
                 Ok(schema)
             }
+            Location::Example(example) => Ok(example.read_schema()),
         }
     }
 
@@ -34,18 +38,19 @@ impl Location {
         match self {
             Location::Path(ref path) => validate::path(&path).map(|_| self),
             Location::Url(ref url) => validate::url(&url).map(|_| self),
+            Location::Example(_) => Ok(self),
         }
     }
 }
 
-pub fn new(location: &str) -> Location {
+pub fn new(location: String) -> Location {
     match Url::parse(&location) {
-        Ok(_url) => Location::Url(String::from(location)),
+        Ok(_url) => Location::Url(location),
         Err(_e) => {
             if location.starts_with("www.") {
-                Location::Url(String::from(location))
+                Location::Url(location)
             } else {
-                Location::Path(String::from(location))
+                Location::Path(location)
             }
         }
     }
@@ -57,10 +62,13 @@ mod tests {
 
     #[test]
     fn path() {
-        assert_eq!(new("aa"), Location::Path(String::from("aa")));
-        assert_eq!(new("bb/cc"), Location::Path(String::from("bb/cc")));
+        assert_eq!(new(String::from("aa")), Location::Path(String::from("aa")));
         assert_eq!(
-            new("dd/ee.prisma"),
+            new(String::from("bb/cc")),
+            Location::Path(String::from("bb/cc"))
+        );
+        assert_eq!(
+            new(String::from("dd/ee.prisma")),
             Location::Path(String::from("dd/ee.prisma"))
         );
     }
@@ -68,17 +76,20 @@ mod tests {
     #[test]
     fn url() {
         assert_eq!(
-            new("https://www.google.com"),
+            new(String::from("https://www.google.com")),
             Location::Url(String::from("https://www.google.com"))
         );
         assert_eq!(
-            new("http://www.google.com"),
+            new(String::from("http://www.google.com")),
             Location::Url(String::from("http://www.google.com"))
         );
         assert_eq!(
-            new("www.google.com"),
+            new(String::from("www.google.com")),
             Location::Url(String::from("www.google.com"))
         );
-        assert_eq!(new("www."), Location::Url(String::from("www.")));
+        assert_eq!(
+            new(String::from("www.")),
+            Location::Url(String::from("www."))
+        );
     }
 }

@@ -1,0 +1,12 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
+
+model User {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model Post {
+  id       Int  @id @default(autoincrement())
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+}

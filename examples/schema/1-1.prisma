@@ -1,0 +1,12 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-one-relations
+
+model User {
+  id      Int      @id @default(autoincrement())
+  profile Profile?
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int // relation scalar field (used in the `@relation` attribute above)
+}

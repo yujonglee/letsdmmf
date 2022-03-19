@@ -1,11 +1,15 @@
 use std::process::{Command, Stdio};
+use std::str::FromStr;
 use std::{
     io::{self, Write},
     thread,
 };
 
+use inquire::{Confirm, Select};
+
 use letsdmmf::cli;
 use letsdmmf::dmmf;
+use letsdmmf::example::Relation;
 use letsdmmf::location;
 
 fn main() -> io::Result<()> {
@@ -19,7 +23,48 @@ fn main() -> io::Result<()> {
         scrolloff,
     } = args;
 
-    let schema = match location::new(&location).get_schema() {
+    let location = match location.as_str() {
+        "example" => {
+            let options = vec![
+                "1-1",
+                "1-1-self",
+                "1-1-multi-field",
+                "1-n",
+                "1-n-self",
+                "1-n-multi-field",
+                "m-n-explicit",
+                "m-n-implicit",
+                "m-n-self",
+                "m-n-self-explicit",
+            ];
+
+            let selected_schema = match Select::new("Select the schema you want", options).prompt()
+            {
+                Ok(option) => Relation::from_str(option).unwrap(),
+                Err(_e) => cli::error(cmd, String::from("Failed to select one of examples")),
+            };
+
+            let is_doc_want = Confirm::new("Do you want to read Prisma's documentation about it?")
+                .with_default(false)
+                .with_help_message("This will open your web broswer")
+                .prompt();
+
+            match is_doc_want {
+                Ok(true) => {
+                    let doc_url = selected_schema.get_doc_url();
+
+                    webbrowser::open(&doc_url).expect("Failed to open web broswer");
+                }
+                Ok(false) => (),
+                Err(_) => cli::error(cmd, String::from("Failed to select one of options")),
+            }
+
+            location::Location::Example(selected_schema)
+        }
+        _ => location::new(location),
+    };
+
+    let schema = match location.get_schema() {
         Ok(schema) => schema,
         Err(message) => cli::error(cmd, message),
     };
@@ -37,7 +82,7 @@ fn main() -> io::Result<()> {
                 cli::error(
                     cmd,
                     String::from(format!(
-                        "Expect file path, got directory instead. Maybe you want \"{}/dmmf.json\"?",
+                        "Expect file path, got directory instead. Did you mean \"{}/dmmf.json\"?",
                         path
                     )),
                 )

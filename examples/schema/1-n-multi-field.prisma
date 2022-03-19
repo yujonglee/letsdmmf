@@ -1,0 +1,16 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations#multi-field-relations-in-relational-databases
+
+model User {
+  firstName String
+  lastName  String
+  post      Post[]
+
+  @@id([firstName, lastName])
+}
+
+model Post {
+  id              Int    @id @default(autoincrement())
+  author          User   @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
+  authorFirstName String // relation scalar field (used in the `@relation` attribute above)
+  authorLastName  String // relation scalar field (used in the `@relation` attribute above)
+}

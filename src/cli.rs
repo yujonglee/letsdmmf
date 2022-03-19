@@ -30,7 +30,7 @@ pub enum Mode {
 
 static ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
 
-static LOCATION: &str = "Location of Prisma schema. Can be file path or url";
+static LOCATION: &str = "Location of Prisma schema. Can be file path or url.\nProvide \"example\" if you want to see examples";
 
 static OUTPUT: &str = "Output file path. If specified, the viewer will not open";
 

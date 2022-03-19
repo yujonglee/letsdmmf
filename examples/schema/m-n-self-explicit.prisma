@@ -1,0 +1,17 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/self-relations#many-to-many-self-relations
+
+model User {
+  id         Int       @id @default(autoincrement())
+  name       String?
+  followedBy Follows[] @relation("follower")
+  following  Follows[] @relation("following")
+}
+
+model Follows {
+  follower    User @relation("follower", fields: [followerId], references: [id])
+  followerId  Int
+  following   User @relation("following", fields: [followingId], references: [id])
+  followingId Int
+
+  @@id([followerId, followingId])
+}

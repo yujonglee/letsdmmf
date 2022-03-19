@@ -1,0 +1,9 @@
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/self-relations#one-to-one-self-relations
+
+model User {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  successorId Int?
+  successor   User?   @relation("BlogOwnerHistory", fields: [successorId], references: [id])
+  predecessor User?   @relation("BlogOwnerHistory")
+}
