@@ -10,27 +10,23 @@ pub enum Location {
 }
 
 impl Location {
-    pub fn get_schema(&self) -> Result<String, String> {
-        match self {
-            Location::Path(path) => match validate::path(&path) {
-                Ok(()) => {
-                    let schema = fs::read_to_string(path).expect("Failed to read schema from path");
+    pub fn get_schema(self) -> Result<String, String> {
+        let location = validate::validate(self)?;
 
-                    Ok(schema)
-                }
-                Err(message) => Err(message),
-            },
-            Location::Url(url) => match validate::url(&url) {
-                Ok(url) => {
-                    let schema = reqwest::blocking::get(url)
-                        .expect("Failed to get response")
-                        .text()
-                        .expect("Failed to convert response to text");
+        match location {
+            Location::Path(path) => {
+                let schema = fs::read_to_string(path).expect("Failed to read schema from path");
 
-                    Ok(schema)
-                }
-                Err(message) => Err(message),
-            },
+                Ok(schema)
+            }
+            Location::Url(url) => {
+                let schema = reqwest::blocking::get(url)
+                    .expect("Failed to get response")
+                    .text()
+                    .expect("Failed to convert response to text");
+
+                Ok(schema)
+            }
         }
     }
 }
