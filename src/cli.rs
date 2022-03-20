@@ -28,20 +28,20 @@ pub enum Mode {
     Line,
 }
 
-static ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
+const ABOUT: &str = "Traverse DMMF of Prisma Schema, in your terminal";
 
-static LOCATION: &str = "Location of Prisma schema. Can be file path or url.\nProvide \"example\" if you want to see examples";
+const LOCATION: &str = "Location of Prisma schema. Can be file path or url.\nProvide \"example\" if you want to see examples";
 
-static OUTPUT: &str = "Output file path. If specified, the viewer will not open";
+const OUTPUT: &str = "Output file path. If specified, the viewer will not open";
 
-static MODE: &str = concat!(
+const MODE: &str = concat!(
     r#"Initial viewing mode. "#,
     r#"In line mode (--mode line), opening and closing curly and square brackets are shown and all Object keys are quoted. "#,
     r#"In data mode (--mode data; the default), closing braces, commas, and quotes around Object keys are elided."#,
     r#"The active mode can be toggled by pressing 'm'"#
 );
 
-static SCROLLOFF: &str = concat!(
+const SCROLLOFF: &str = concat!(
     r#"Number of lines to maintain as padding between the currently focused row and the top or bottom of the screen."#,
     r#"Setting this to a large value will keep the focused in the middle of the screen (except at the start or end of a file)"#
 );
