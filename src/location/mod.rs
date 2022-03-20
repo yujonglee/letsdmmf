@@ -1,7 +1,7 @@
 use reqwest::Url;
 use std::fs;
 
-use crate::example::*;
+use crate::example::Relation;
 
 mod validate;
 

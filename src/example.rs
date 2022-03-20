@@ -1,15 +1,15 @@
 use std::str::FromStr;
 
-pub const ONE_TO_ONE: &str = include_str!("../examples/schema/1-1.prisma");
-pub const ONE_TO_ONE_SELF: &str = include_str!("../examples/schema/1-1-self.prisma");
-pub const ONE_TO_ONE_MULTI: &str = include_str!("../examples/schema/1-1-multi-field.prisma");
-pub const ONE_TO_MANY: &str = include_str!("../examples/schema/1-n.prisma");
-pub const ONE_TO_MANY_SELF: &str = include_str!("../examples/schema/1-n-self.prisma");
-pub const ONE_TO_MANY_MULTI: &str = include_str!("../examples/schema/1-n-multi-field.prisma");
-pub const MANY_TO_MANY_EXPLICIT: &str = include_str!("../examples/schema/m-n-explicit.prisma");
-pub const MANY_TO_MANY_IMPLICIT: &str = include_str!("../examples/schema/m-n-implicit.prisma");
-pub const MANY_TO_MANY_SELF: &str = include_str!("../examples/schema/m-n-self.prisma");
-pub const MANY_TO_MANY_SELF_EXPLICIT: &str =
+const ONE_TO_ONE: &str = include_str!("../examples/schema/1-1.prisma");
+const ONE_TO_ONE_SELF: &str = include_str!("../examples/schema/1-1-self.prisma");
+const ONE_TO_ONE_MULTI: &str = include_str!("../examples/schema/1-1-multi-field.prisma");
+const ONE_TO_MANY: &str = include_str!("../examples/schema/1-n.prisma");
+const ONE_TO_MANY_SELF: &str = include_str!("../examples/schema/1-n-self.prisma");
+const ONE_TO_MANY_MULTI: &str = include_str!("../examples/schema/1-n-multi-field.prisma");
+const MANY_TO_MANY_EXPLICIT: &str = include_str!("../examples/schema/m-n-explicit.prisma");
+const MANY_TO_MANY_IMPLICIT: &str = include_str!("../examples/schema/m-n-implicit.prisma");
+const MANY_TO_MANY_SELF: &str = include_str!("../examples/schema/m-n-self.prisma");
+const MANY_TO_MANY_SELF_EXPLICIT: &str =
     include_str!("../examples/schema/m-n-self-explicit.prisma");
 
 #[derive(Debug, PartialEq)]

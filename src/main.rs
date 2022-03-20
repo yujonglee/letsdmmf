@@ -1,7 +1,7 @@
-use std::process::{Command, Stdio};
-use std::str::FromStr;
 use std::{
     io::{self, Write},
+    process::{Command, Stdio},
+    str::FromStr,
     thread,
 };
 
