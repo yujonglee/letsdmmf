@@ -1,7 +1,15 @@
 [package]
 name = "letsdmmf"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2021"
+authors = ["yujonglee <yujonglee.dev@gmail.com>"]
+license = "MIT"
+description = "Traverse DMMF of Prisma schema, in your terminal"
+readme = "README.md"
+homepage = "https://github.com/yujong-lee/letsdmmf"
+repository = "https://github.com/yujong-lee/letsdmmf"
+keywords = ["prisma", "dmmf", "cli"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 datamodel = { git = "https://github.com/prisma/prisma-engines" }
