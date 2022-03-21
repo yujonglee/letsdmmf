@@ -81,10 +81,10 @@ fn main() -> io::Result<()> {
             if std::path::Path::new(&path).is_dir() {
                 cli::error(
                     cmd,
-                    String::from(format!(
+                    format!(
                         "Expect file path, got directory instead. Did you mean \"{}/dmmf.json\"?",
                         path
-                    )),
+                    ),
                 )
             }
 

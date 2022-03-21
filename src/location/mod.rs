@@ -36,8 +36,8 @@ impl Location {
 
     pub fn validate(self) -> Result<Location, String> {
         match self {
-            Location::Path(ref path) => validate::path(&path).map(|_| self),
-            Location::Url(ref url) => validate::url(&url).map(|_| self),
+            Location::Path(ref path) => validate::path(path).map(|_| self),
+            Location::Url(ref url) => validate::url(url).map(|_| self),
             Location::Example(_) => Ok(self),
         }
     }

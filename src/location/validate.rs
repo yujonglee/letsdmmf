@@ -100,7 +100,7 @@ mod path {
 }
 
 pub fn url(url: &str) -> Result<String, String> {
-    match Url::parse(&url) {
+    match Url::parse(url) {
         Ok(url) => Ok(url.to_string()),
         Err(e) => Err(e.to_string()),
     }
