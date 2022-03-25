@@ -2,7 +2,9 @@
 
 [![release](https://github.com/yujong-lee/letsdmmf/actions/workflows/ci.yml/badge.svg)](https://github.com/yujong-lee/letsdmmf/actions/workflows/ci.yml)
 
-Traverse `DMMF` of `Prisma schema`, in your terminal.
+Traverse
+[`DMMF`](https://github.com/prisma/prisma/blob/main/packages/generator-helper/src/dmmf.ts)
+of `Prisma schema`, in your terminal.
 
 Powered by [`jless`](https://github.com/PaulJuliusMartinez/jless).
 
@@ -31,22 +33,13 @@ letsdmmf https://raw.githubusercontent.com/prisma/prisma-examples/latest/databas
 
 ### Examples
 
-This will show you minimal examples of `Prisma schema`.
+This will show you minimal
+[examples](https://github.com/yujong-lee/letsdmmf/tree/master/examples/schema)
+of `Prisma schema`.
 
 ```shell
 letsdmmf example
 ```
-
-- 1-1
-- 1-1-self
-- 1-1-multi-field
-- 1-n
-- 1-n-self
-- 1-n-multi-field
-- m-n-explicit
-- m-n-implicit
-- m-n-self
-- m-n-self-explicit
 
 ### Output
 
