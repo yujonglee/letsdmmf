@@ -76,8 +76,6 @@ fn main() -> io::Result<()> {
 
     match output {
         Some(path) => {
-            let contents = serde_json::to_string_pretty(&dmmf).expect("Failed to stringify DMMF");
-
             if std::path::Path::new(&path).is_dir() {
                 cli::error(
                     cmd,
@@ -87,6 +85,8 @@ fn main() -> io::Result<()> {
                     ),
                 )
             }
+
+            let contents = serde_json::to_string_pretty(&dmmf).expect("Failed to stringify DMMF");
 
             std::fs::write(path, contents).expect("Failed to write output")
         }
