@@ -1,12 +1,15 @@
 use reqwest::Url;
-use std::path::Path;
+use std::{ffi::OsStr, path::Path};
 
 pub fn path(path: &str) -> Result<(), String> {
     let path = Path::new(path);
     let is_exist = path.exists();
 
     if !is_exist {
-        let message = format!("No such file or directory: \"{}\"", path.to_str().unwrap());
+        let message = format!(
+            "No such file or directory: \"{}\"",
+            path.to_str().unwrap_or("UNKNOWN")
+        );
 
         return Err(message);
     };
@@ -20,7 +23,7 @@ pub fn path(path: &str) -> Result<(), String> {
     match path.extension() {
         Some(extension) => {
             if extension != "prisma" {
-                let file_name = path.file_name().unwrap();
+                let file_name = path.file_name().unwrap_or(OsStr::new("UNKNOWN"));
                 let message = format!(
                     "Invalid File Extension. \"something.prisma\" expected, got {:?} instead",
                     file_name
