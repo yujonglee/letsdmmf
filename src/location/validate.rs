@@ -23,7 +23,7 @@ pub fn path(path: &str) -> Result<(), String> {
     match path.extension() {
         Some(extension) => {
             if extension != "prisma" {
-                let file_name = path.file_name().unwrap_or(OsStr::new("UNKNOWN"));
+                let file_name = path.file_name().unwrap_or_else(|| OsStr::new("UNKNOWN"));
                 let message = format!(
                     "Invalid File Extension. \"something.prisma\" expected, got {:?} instead",
                     file_name
