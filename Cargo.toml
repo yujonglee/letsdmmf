@@ -12,11 +12,7 @@ keywords = ["prisma", "dmmf", "cli"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-datamodel = { git = "https://github.com/prisma/prisma-engines" }
-request-handlers = { git = "https://github.com/prisma/prisma-engines" }
-prisma-models = { git = "https://github.com/prisma/prisma-engines" }
-query-core = { git = "https://github.com/prisma/prisma-engines" }
-datamodel-connector = { git = "https://github.com/prisma/prisma-engines" }
+dmmf = { git = "https://github.com/tufan-io/prisma-engines/", rev = "334e6e55c230988126fc399427727d24a2172984"}
 clap = { version = "3.1.6", features = ["derive"] }
 reqwest = { version = "0.11", features = ["blocking"] }
 serde_json = { version = "1.0" }

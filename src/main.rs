@@ -7,10 +7,9 @@ use std::{
 
 use inquire::{Confirm, Select};
 
-use letsdmmf::cli;
-use letsdmmf::dmmf;
 use letsdmmf::example::Relation;
 use letsdmmf::location;
+use letsdmmf::{cli, prisma};
 
 fn main() -> io::Result<()> {
     let cmd = cli::get_cmd();
@@ -69,10 +68,7 @@ fn main() -> io::Result<()> {
         Err(message) => cli::error(cmd, message),
     };
 
-    let dmmf = match dmmf::from(schema) {
-        Ok(dmmf) => dmmf,
-        Err(message) => cli::error(cmd, message),
-    };
+    let dmmf = prisma::dmmf_from_schema(&schema);
 
     match output {
         Some(path) => {
