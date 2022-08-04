@@ -1,5 +1,10 @@
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
 
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
 model User {
   id    Int    @id @default(autoincrement())
   posts Post[]

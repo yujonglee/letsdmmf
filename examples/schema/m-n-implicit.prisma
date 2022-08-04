@@ -1,5 +1,10 @@
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#implicit-many-to-many-relations
 
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
 model Post {
   id         Int        @id @default(autoincrement())
   categories Category[]

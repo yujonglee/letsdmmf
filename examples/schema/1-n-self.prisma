@@ -1,5 +1,10 @@
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/self-relations#one-to-many-self-relations
 
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
 model User {
   id        Int     @id @default(autoincrement())
   name      String?

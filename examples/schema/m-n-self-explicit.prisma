@@ -1,10 +1,15 @@
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/self-relations#many-to-many-self-relations
 
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
 model User {
   id         Int       @id @default(autoincrement())
   name       String?
-  followedBy Follows[] @relation("follower")
-  following  Follows[] @relation("following")
+  followedBy Follows[] @relation("following")
+  following  Follows[] @relation("follower")
 }
 
 model Follows {

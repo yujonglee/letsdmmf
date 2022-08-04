@@ -1,5 +1,10 @@
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations#multi-field-relations-in-relational-databases
 
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
 model User {
   firstName String
   lastName  String
