@@ -12,7 +12,7 @@ keywords = ["prisma", "dmmf", "cli"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-dmmf = { git = "https://github.com/tufan-io/prisma-engines/", rev = "334e6e55c230988126fc399427727d24a2172984"}
+dmmf = { git = "https://github.com/tufan-io/prisma-engines/", tag = "tufan-4.4.0" }
 clap = { version = "3.1.6", features = ["derive"] }
 reqwest = { version = "0.11", features = ["blocking"] }
 serde_json = { version = "1.0" }
