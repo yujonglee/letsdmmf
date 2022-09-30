@@ -5,7 +5,7 @@ use crate::example::Relation;
 
 mod validate;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Location {
     Url(String),
     Path(String),

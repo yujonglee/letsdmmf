@@ -12,7 +12,7 @@ const MANY_TO_MANY_SELF: &str = include_str!("../examples/schema/m-n-self.prisma
 const MANY_TO_MANY_SELF_EXPLICIT: &str =
     include_str!("../examples/schema/m-n-self-explicit.prisma");
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Relation {
     OneToOne,
     OneToOneSelf,
